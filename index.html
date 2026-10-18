@@ -1,33 +1,130 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <!-- Fondamentale per far adattare la pagina agli schermi dei telefoni senza fare zoom -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Carica Video Allenamento</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="file"] { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; width: 100%; }
-        button:hover { background-color: #0056b3; }
+        * { box-sizing: border-box; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #f4f7f6;
+            margin: 0; 
+            padding: 15px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px; /* Perfetto per qualsiasi smartphone */
+        }
+
+        h2 { 
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* Input di testo ottimizzati per il touch screen */
+        input[type="text"] { 
+            width: 100%; 
+            padding: 14px; 
+            border: 1.5px solid #dcdcdc;
+            border-radius: 10px;
+            font-size: 16px; /* Evita lo zoom automatico fastidioso su iOS quando si clicca */
+            background-color: #fafafa;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            background-color: #fff;
+        }
+
+        /* Stile personalizzato e moderno per il caricamento file (più facile da cliccare rispetto a quello standard) */
+        .file-input-wrapper {
+            position: relative;
+            margin-top: 5px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px dashed #007bff;
+            border-radius: 10px;
+            background-color: #eef5ff;
+            font-size: 14px;
+            color: #0056b3;
+            cursor: pointer;
+        }
+        
+        /* Pulsante di invio grande, "cicciotto" e facilissimo da premere con il pollice */
+        button { 
+            background-color: #007bff; 
+            color: white; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 12px;
+            font-size: 16px; 
+            font-weight: bold;
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+            -webkit-tap-highlight-color: transparent; /* Rimuove il flash blu al tocco su mobile */
+        }
+        
+        button:active { 
+            background-color: #0056b3; 
+            transform: scale(0.98); /* Piccolo feedback visivo quando viene premuto */
+        }
     </style>
 </head>
 <body>
-    <h2>Area Caricamento Video</h2>
-    
-    <!-- Il form invia i dati a Flask usando il metodo POST -->
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="atleta">Nome Atleta:</label>
-            <input type="text" id="atleta" name="nome_atleta" required placeholder="Es. Mario Rossi">
-        </div>
+
+    <div class="card">
+        <h2>🏋️‍♂️ Carica Allenamento</h2>
         
-        <div class="form-group">
-            <label for="video">Seleziona il Video dell'Allenamento:</label>
-            <input type="file" id="video" name="file_video" accept="video/*" required>
-        </div>
-        
-        <button type="submit">Invia Video</button>
-    </form>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="atleta">Il tuo Nome e Cognome:</label>
+                <input type="text" id="atleta" name="nome_atleta" required placeholder="Es. Mario Rossi" autocomplete="name">
+            </div>
+            
+            <div class="form-group">
+                <label for="video">Seleziona il Video:</label>
+                <div class="file-input-wrapper">
+                    <!-- accept="video/*" aprirà direttamente la galleria video o la fotocamera dello smartphone -->
+                    <input type="file" id="video" name="file_video" accept="video/*" required>
+                </div>
+            </div>
+            
+            <button type="submit">Invia Video Ora</button>
+        </form>
+    </div>
+
 </body>
 </html>
+
