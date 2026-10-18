@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Carica Video Allenamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="file"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; width: 100%; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>Area Caricamento Video</h2>
+    
+    <!-- Il form invia i dati a Flask usando il metodo POST -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="atleta">Nome Atleta:</label>
+            <input type="text" id="atleta" name="nome_atleta" required placeholder="Es. Mario Rossi">
+        </div>
+        
+        <div class="form-group">
+            <label for="video">Seleziona il Video dell'Allenamento:</label>
+            <input type="file" id="video" name="file_video" accept="video/*" required>
+        </div>
+        
+        <button type="submit">Invia Video</button>
+    </form>
+</body>
+</html>
